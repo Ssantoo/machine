@@ -1,14 +1,19 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Item {
 
     private String itemName; //아이템 이름
 
-    private String grade; //등급
+    private Grade grade; //등급
 
     private LocalDateTime expirationTime;  //유통기한
 
-    public Item(String itemName, String grade, LocalDateTime expirationTime) {
+    private Random random;
+
+    public Item(String itemName, Grade grade, LocalDateTime expirationTime) {
         this.itemName = itemName;
         this.grade = grade;
         this.expirationTime = expirationTime;
@@ -18,7 +23,7 @@ public class Item {
         return itemName;
     }
 
-    public String getGrade(){
+    public Grade getGrade(){
         return grade;
     }
 
@@ -39,4 +44,5 @@ public class Item {
                  expirationTime +
                 '}';
     }
+
 }

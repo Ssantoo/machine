@@ -17,7 +17,7 @@ public class Wallet {
     }
 
     //차감
-    public boolean pay(int amount){
+    public boolean payAble(int amount){
         if(cash >= amount){
             cash -= amount;
             return true;

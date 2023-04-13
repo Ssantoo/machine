@@ -10,11 +10,12 @@ public class Drawing {
 
     private Random random;  //랜덤값 생성
 
+    private LocalDateTime currentTime;
     private int bGradeDrawnCount; // B가 뽑히는 횟수
 
-    final int PRICE = 100; // 뽑기 1회당 차감되는 금액
+    private static final int price = 100; // 뽑기 1회당 차감되는 금액
 
-    public Drawing(List<Item> items, Wallet wallet) {
+    public Drawing(List<Item> items, Wallet wallet, LocalDateTime currentTime) {
         this.items = items;
         this.wallet = wallet;
         random = new Random();
@@ -22,28 +23,43 @@ public class Drawing {
 
 
     //뽑기할 때 호출되는 메서드
-    public List<Object> draw(int drawsCount, LocalDateTime currentTime) {
+    public List<Object> draw(int drawsCount) {
         List<Object> drawnResults = new ArrayList<>();
-
         for (int i = 0; i < drawsCount; i++) {
-            if (wallet.pay(PRICE)) {
-                Item drawnItem = drawItem(currentTime);
-                if (drawnItem != null) {
-                    if (drawnItem.getGrade().equals("B")) {
-                        bGradeDrawnCount++;
-                    }
-                    drawnResults.add(drawnItem);
-                } else{
-                    drawnResults.add("꽝");
-                }
-            }
+            drawAction(drawnResults);
         }
         return drawnResults;
     }
 
+    public void drawAction(List<Object> drawnResults){
+        checkAblePay();
+        drawnResults(drawnResults);
+    }
+
+    public void checkAblePay(){
+        if(!wallet.payAble(price)){
+            throw new RuntimeException("금액부족");
+        }
+    }
+
+    public void drawnResults(List<Object> drawnResults){
+        Item drawnItem = drawItem();
+
+        //꽝일경우
+        if(drawnItem == null){
+            drawnResults.add("꽝");
+        }
+
+        //B등급일경우
+        if(drawnItem.getGrade().equals("B")){
+            bGradeDrawnCount++;
+        }
+        drawnResults.add(drawnItem);
+
+    }
 
     //상품 뽑는 로직
-    private Item drawItem(LocalDateTime currentTime) {
+    private Item drawItem() {
 
         Item result = null;
 
@@ -70,6 +86,9 @@ public class Drawing {
         int size = random.nextInt(availableItems.size());
         return availableItems.get(size);
     }
+
+
+
 
 
 }
