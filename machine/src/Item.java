@@ -14,6 +14,19 @@ public class Item {
         this.expirationTime = expirationTime;
     }
 
+    public String getName(){
+        return itemName;
+    }
+
+    public String getGrade(){
+        return grade;
+    }
+
+    public LocalDateTime getExpirationTime(){
+        return expirationTime;
+    }
+
+
     public boolean isExpired(LocalDateTime currentTime){
         return expirationTime.isBefore(currentTime);
     }

@@ -10,6 +10,8 @@ public class Drawing {
 
     private Random random;  //랜덤값 생성
 
+    private int bGradeDrawnCount; // B가 뽑히는 횟수
+
     final int PRICE = 100; // 뽑기 1회당 차감되는 금액
 
     public Drawing(List<Item> items, Wallet wallet) {
@@ -18,13 +20,18 @@ public class Drawing {
         random = new Random();
     }
 
-    public List<Item> draw(int draws, LocalDateTime currentTime){
+
+    //뽑기할 때 호출되는 메서드
+    public List<Item> draw(int drawsCount, LocalDateTime currentTime) {
         List<Item> drawnItems = new ArrayList<>();
 
-        for(int i =0; i<draws; i++){
-            if(wallet.pay(100)){
+        for (int i = 0; i < drawsCount; i++) {
+            if (wallet.pay(PRICE)) {
                 Item drawnItem = drawItem(currentTime);
-                if(drawnItem != null){
+                if (drawnItem != null) {
+                    if (drawnItem.getGrade().equals("B")) {
+                        bGradeDrawnCount++;
+                    }
                     drawnItems.add(drawnItem);
                 }
             }
@@ -34,10 +41,34 @@ public class Drawing {
     }
 
 
-    
+    //상품 뽑는 로직
+    private Item drawItem(LocalDateTime currentTime) {
 
+        Item result = null;
 
+        double drawChance = random.nextDouble();
 
+        if (drawChance < 0.9) {
+            result = drawItemByGrade("A", currentTime);
+        } else if (bGradeDrawnCount < 3) {
+            result = drawItemByGrade("B", currentTime);
+        }
+
+        return result;
+    }
+
+    //등급별 상품을 뽑는 로직
+    private Item drawItemByGrade(String grade, LocalDateTime currentTime) {
+
+        List<Item> availableItems = new ArrayList<>();
+        for(Item item : items){
+            if(item.getGrade().equals(grade) && !item.isExpired(currentTime)) {
+                availableItems.add(item);
+            }
+        }
+        int size = random.nextInt(availableItems.size());
+        return availableItems.get(size);
+    }
 
 
 }
