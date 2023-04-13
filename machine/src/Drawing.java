@@ -22,8 +22,8 @@ public class Drawing {
 
 
     //뽑기할 때 호출되는 메서드
-    public List<Item> draw(int drawsCount, LocalDateTime currentTime) {
-        List<Item> drawnItems = new ArrayList<>();
+    public List<Object> draw(int drawsCount, LocalDateTime currentTime) {
+        List<Object> drawnResults = new ArrayList<>();
 
         for (int i = 0; i < drawsCount; i++) {
             if (wallet.pay(PRICE)) {
@@ -32,12 +32,13 @@ public class Drawing {
                     if (drawnItem.getGrade().equals("B")) {
                         bGradeDrawnCount++;
                     }
-                    drawnItems.add(drawnItem);
+                    drawnResults.add(drawnItem);
+                } else{
+                    drawnResults.add("꽝");
                 }
             }
         }
-
-        return drawnItems;
+        return drawnResults;
     }
 
 
