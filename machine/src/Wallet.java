@@ -1,6 +1,6 @@
 public class Wallet {
 
-    private int cash;
+    private int cash; // 고객 금액
 
     public Wallet(int cash){
         this.cash = cash;
