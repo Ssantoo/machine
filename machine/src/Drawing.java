@@ -51,7 +51,7 @@ public class Drawing {
         }
 
         //B등급일경우
-        if(drawnItem.getGrade().equals("B")){
+        if(){
             bGradeDrawnCount++;
         }
         drawnResults.add(drawnItem);
@@ -70,7 +70,6 @@ public class Drawing {
         } else if (bGradeDrawnCount < 3) {
             result = drawItemByGrade("B", currentTime);
         }
-
         return result;
     }
 

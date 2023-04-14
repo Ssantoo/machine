@@ -2,6 +2,9 @@ public class Wallet {
 
     private int cash; // 고객 금액
 
+    private List<DrawRecord> drawRecords; // 뽑기기록
+
+
     public Wallet(int cash){
         this.cash = cash;
     }
