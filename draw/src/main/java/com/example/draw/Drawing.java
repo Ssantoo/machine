@@ -55,7 +55,8 @@ public class Drawing {
 
         if (drawChance < 0.9) {
             result = drawItemByGrade("A");
-        } else if (bGradeDrawnCount < 3) {
+        }
+        if (bGradeDrawnCount < 3) {
             result = drawItemByGrade("B");
         }
 
@@ -70,9 +71,7 @@ public class Drawing {
                 availableItems.add(item);
             }
         }
-        if (availableItems.isEmpty()) {
-            return null;
-        }
+
 
         return availableItems.get(0);
     }
