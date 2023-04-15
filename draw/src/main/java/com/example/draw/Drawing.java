@@ -57,16 +57,15 @@ public class Drawing {
 
         double drawChance = random.nextDouble();
 
-        if (drawChance < 0.5) {
+        if (drawChance <= 0.5) {
             double prizeChance = random.nextDouble();
-            if (bGradeDrawnCount < 3 && prizeChance >= A_GRADE_CHANCE) {
-                return drawItemByGrade("B");
-            } else {
+            if (prizeChance < A_GRADE_CHANCE) {
                 return drawItemByGrade("A");
+            } else if (bGradeDrawnCount <= 3) {
+                return drawItemByGrade("B");
             }
-        } else {
-            return null;
         }
+        return null;
     }
 
 
