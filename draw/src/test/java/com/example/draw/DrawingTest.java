@@ -34,6 +34,12 @@ class DrawingTest {
         Assertions.assertEquals(10000, wallet.getCash());
     }
 
+    @Test
+    public void 충전_확인(){
+        member.getWallet().charge(5000);
+        Assertions.assertEquals(15000, member.getWallet().getCash());
+    }
+
     
 
 
