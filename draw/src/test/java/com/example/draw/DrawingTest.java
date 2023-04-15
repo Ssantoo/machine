@@ -30,14 +30,25 @@ class DrawingTest {
 
     @Test
     public void 잔액_확인(){
-        Wallet wallet = new Wallet(10000);
-        Assertions.assertEquals(10000, wallet.getCash());
+        assertEquals(10000, member.getWallet().getCash());
     }
 
     @Test
     public void 충전_확인(){
         member.getWallet().charge(5000);
-        Assertions.assertEquals(15000, member.getWallet().getCash());
+        assertEquals(15000, member.getWallet().getCash());
+    }
+
+    @Test
+    public void 돈사용_확인(){
+        member.getWallet().useCash(5000);
+        assertEquals(5000,member.getWallet().getCash());
+    }
+
+    @Test
+    public void 초과금액사용_확인(){
+        member.getWallet().useCash(15000);
+        assertEquals(-5000,member.getWallet().getCash());
     }
 
     
