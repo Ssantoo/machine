@@ -12,14 +12,13 @@ public class Drawing {
     private static final int PRICE = 100;
     private int bGradeDrawnCount;
     private final LocalDateTime currentTime;
-    private final Wallet wallet;
+
     private final Random random;
 
 
 
-    public Drawing(List<Item> items, Wallet wallet) {
+    public Drawing(List<Item> items) {
         this.items = items;
-        this.wallet = wallet;
         this.currentTime = LocalDateTime.now();
         this.random = new Random();
     }
@@ -28,24 +27,17 @@ public class Drawing {
         return PRICE;
     }
 
-
     public List<Object> drawList(int drawsCount) {
         List<Object> drawnResults = new ArrayList<>();
         for (int i = 0; i < drawsCount; i++) {
-            drawAction(drawnResults);
+            Item drawnItem = drawItem();
+            drawnResults(drawnResults, drawnItem);
         }
         return drawnResults;
     }
 
-    public void drawAction(List<Object> drawnResults) {
-        wallet.useCash(PRICE);
-        Item drawnItem = drawItem();
-        //System.out.println("여기" + drawnItem);
-        drawnResults(drawnResults, drawnItem);
-    }
-
     public void drawnResults(List<Object> drawnResults, Item drawnItem) {
-       // System.out.println("?" +drawnItem);
+
         // 꽝일 경우
         if (drawnItem == null) {
             drawnResults.add("꽝");
@@ -64,7 +56,6 @@ public class Drawing {
         double drawChance = random.nextDouble();
         double prizeChance = random.nextDouble();
 
-
         if (drawChance <= 0.5) {
             if (bGradeDrawnCount > 3 && prizeChance < A_GRADE_CHANCE) {
                 return drawItemByGrade("A");
@@ -76,22 +67,12 @@ public class Drawing {
         return null;
     }
 
-
     // 등급별 상품을 뽑는 로직
     private Item drawItemByGrade(String grade) {
 
-        //System.out.println(currentTime);
-        //System.out.println("여긴 오니?");
         List<Item> availableItems = new ArrayList<>();
         for (Item item : items) {
-          //  System.out.println("그럼"+item.getGrade());
-            //System.out.println("여긴 뭐야"+grade);
-            //System.out.println(currentTime);
-            //System.out.println(!item.isExpired(currentTime)+"지났니?");
-            //System.out.println(items);
             if (item.getGrade().equals(grade) && !item.isExpired(currentTime)) {
-              //  System.out.println(item.getGrade());
-               // System.out.println("여기를 안오네?");
                 availableItems.add(item);
             }
         }
@@ -99,8 +80,6 @@ public class Drawing {
         if (availableItems.isEmpty()) {
             return null;
         }
-
-        //System.out.println("?"+availableItems);
 
         int randomIndex = random.nextInt(availableItems.size());
         return availableItems.get(randomIndex);

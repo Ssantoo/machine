@@ -1,6 +1,5 @@
 package com.example.draw;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +18,14 @@ class DrawingTest {
     @BeforeEach
     public void 초기세팅(){
         items = new ArrayList<>();
-        items.add(new Item("CHICKEN", Grade.B, LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
-        items.add(new Item("CIDER", Grade.A, LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
-        items.add(new Item("COLA", Grade.A, LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
-        items.add(new Item("PIZZA", Grade.A, LocalDateTime.of(2023, 3, 23, 2, 20, 19)));
+        items.add(new Item("CHICKEN", "B", LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
+        items.add(new Item("CIDER", "A", LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
+        items.add(new Item("COLA", "A", LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
+        items.add(new Item("PIZZA", "A", LocalDateTime.of(2023, 3, 23, 2, 20, 19)));
 
         member = new Member("조현재", 10000);
-        drawing = new Drawing(items);
+
+
     }
 
     @Test
@@ -51,7 +51,11 @@ class DrawingTest {
         assertEquals(-5000,member.getWallet().getCash());
     }
 
-    
+    @Test
+    public void 드로우결과_확인(){
+
+
+    }
 
 
 

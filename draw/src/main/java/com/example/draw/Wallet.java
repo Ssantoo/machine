@@ -6,11 +6,9 @@ import java.util.List;
 public class Wallet {
 
     private int cash; //현 금액
-    private List<DrawRecord> drawRecords; //뽑기 기록
 
-    public Wallet(int initialCash){
+    public Wallet(int initialCash) {
         this.cash = initialCash;
-        this.drawRecords = new ArrayList<>();
     }
 
     //돈 충전
@@ -30,19 +28,5 @@ public class Wallet {
     public int getCash(){
         return this.cash;
     }
-
-    // 뽑기 기록을 추가
-    public void addDrawRecord(DrawRecord record) {
-        this.drawRecords.add(record);
-    }
-
-    // 뽑기 기록을 보여주는
-    public List<DrawRecord> getDrawRecords() {
-        return this.drawRecords;
-    }
-
-
-
-
 
 }

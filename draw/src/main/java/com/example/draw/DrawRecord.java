@@ -4,35 +4,19 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DrawRecord {
-    private String memberName;
-    private LocalDateTime drawTime;
-    private int drawsCount;
-    private Object[] results;
+    private LocalDateTime dateTime;
+    private Object result;
 
-    public DrawRecord(String memberName, LocalDateTime drawTime, int drawsCount, Object[] results) {
-        this.memberName = memberName;
-        this.drawTime = drawTime;
-        this.drawsCount = drawsCount;
-        this.results = results;
+    public DrawRecord(LocalDateTime dateTime, Object result) {
+        this.dateTime = dateTime;
+        this.result = result;
     }
 
-    public String getMemberName() {
-        return memberName;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public LocalDateTime getDrawTime() {
-        return drawTime;
+    public Object getResult() {
+        return result;
     }
-
-    public int getDrawsCount() {
-        return drawsCount;
-    }
-
-    public Object[] getResults() {
-        return results;
-    }
-
-
-
-
 }
