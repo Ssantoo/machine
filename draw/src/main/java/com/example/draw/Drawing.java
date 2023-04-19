@@ -43,7 +43,7 @@ public class Drawing {
             drawnResults.add("꽝");
         } else {
             // B등급일 경우
-             if ("B".equals(drawnItem.getGrade())) {
+             if (Grade.B.equals(drawnItem.getGrade())) {
                  bGradeDrawnCount++;
              }
             drawnResults.add(drawnItem);
@@ -58,9 +58,9 @@ public class Drawing {
 
         if (drawChance <= 0.5) {
             if (bGradeDrawnCount > 3 || prizeChance < A_GRADE_CHANCE) {
-                return drawItemByGrade("A");
+                return drawItemByGrade(Grade.A);
             } else {
-                return drawItemByGrade("B");
+                return drawItemByGrade(Grade.B);
             }
         }
         // 나머지 경우는 꽝으로 처리
@@ -68,7 +68,7 @@ public class Drawing {
     }
 
     // 등급별 상품을 뽑는 로직
-    private Item drawItemByGrade(String grade) {
+    private Item drawItemByGrade(Grade grade) {
 
         List<Item> availableItems = new ArrayList<>();
         for (Item item : items) {

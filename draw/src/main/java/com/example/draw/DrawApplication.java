@@ -9,10 +9,10 @@ public class DrawApplication {
     public static void main(String[] args) {
 
         List<Item> items = new ArrayList<>();
-        items.add(new Item("CHICKEN", "B", LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
-        items.add(new Item("CIDER", "A", LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
-        items.add(new Item("COLA", "A", LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
-        items.add(new Item("PIZZA", "A", LocalDateTime.of(2023, 3, 23, 2, 20, 19)));
+        items.add(new Item("CHICKEN", Grade.B, LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
+        items.add(new Item("CIDER", Grade.A, LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
+        items.add(new Item("COLA", Grade.A, LocalDateTime.of(2023, 4, 23, 2, 20, 19)));
+        items.add(new Item("PIZZA", Grade.A, LocalDateTime.of(2023, 3, 23, 2, 20, 19)));
 
         Scanner scanner = new Scanner(System.in);
         Member member = new Member("조현재", 10000);

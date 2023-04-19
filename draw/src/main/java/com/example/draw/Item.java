@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 public class Item {
 
     private String itemName;
-    private String itemGrade;
+    private Grade itemGrade;
     private LocalDateTime expirationTime;
 
-    public Item(String itemName, String itemGrade, LocalDateTime expirationTime) {
+    public Item(String itemName, Grade itemGrade, LocalDateTime expirationTime) {
         this.itemName = itemName;
         this.itemGrade = itemGrade;
         this.expirationTime = expirationTime;
@@ -18,7 +18,7 @@ public class Item {
         return itemName;
     }
 
-    public String getGrade(){
+    public Grade getGrade(){
         return itemGrade;
     }
 
