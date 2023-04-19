@@ -25,6 +25,7 @@ class DrawingTest {
 
         member = new Member("조현재", 10000);
 
+
     }
 
     @Test

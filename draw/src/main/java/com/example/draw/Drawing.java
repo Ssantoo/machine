@@ -57,7 +57,7 @@ public class Drawing {
         double prizeChance = random.nextDouble();
 
         if (drawChance <= 0.5) {
-            if (bGradeDrawnCount > 3 || prizeChance < A_GRADE_CHANCE) {
+            if (bGradeDrawnCount > 3 && prizeChance < A_GRADE_CHANCE) {
                 return drawItemByGrade("A");
             } else {
                 return drawItemByGrade("B");
