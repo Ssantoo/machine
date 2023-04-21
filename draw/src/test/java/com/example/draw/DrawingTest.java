@@ -68,6 +68,19 @@ class DrawingTest {
         assertEquals(initialCash - payment, remainingCash);
     }
 
+    @Test
+    public void 항목만료_테스트() throws Exception {
+        // given
+        LocalDateTime now = LocalDateTime.of(2023, 4, 21, 0, 0, 0);
+        Item expiredItem = new Item("EXPIRED_ITEM", Grade.A, LocalDateTime.of(2023, 3, 1, 0, 0, 0));
+
+        // when
+        boolean isExpired = expiredItem.isExpired(now);
+
+        // then
+        assertTrue(isExpired);
+    }
+    
     
 
 

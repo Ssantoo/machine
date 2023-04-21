@@ -18,6 +18,7 @@ public class Member {
         this.drawRecords = new ArrayList<>();
     }
 
+
     public String getName() {
         return name;
     }
