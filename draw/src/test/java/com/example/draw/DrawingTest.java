@@ -80,8 +80,22 @@ class DrawingTest {
         // then
         assertTrue(isExpired);
     }
+
+    @Test
+    public void 항목만료안된_테스트() throws Exception {
+        // given
+        LocalDateTime now = LocalDateTime.of(2023, 4, 21, 0, 0, 0);
+        Item notExpiredItem = new Item("NOT_EXPIRED_ITEM", Grade.A, LocalDateTime.of(2023, 5, 1, 0, 0, 0));
+
+        // when
+        boolean isExpired = notExpiredItem.isExpired(now);
+
+        // then
+        assertFalse(isExpired);
+    }
+
     
-    
+
 
 
 
