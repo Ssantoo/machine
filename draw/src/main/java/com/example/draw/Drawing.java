@@ -17,6 +17,7 @@ public class Drawing {
 
 
 
+
     public Drawing(List<Item> items) {
         this.items = items;
         this.currentTime = LocalDateTime.now();

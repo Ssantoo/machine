@@ -2,13 +2,16 @@ package com.example.draw;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class DrawingTest {
 
@@ -28,6 +31,7 @@ class DrawingTest {
 
         member = new Member("조현재", 10000);
 
+        drawing = new Drawing(items); // Drawing 객체 초기화
 
     }
 
@@ -94,9 +98,40 @@ class DrawingTest {
         assertFalse(isExpired);
     }
 
-    
+    @Test
+    public void B항목_테스트() throws Exception {
+        //given
+        int drawsCount = 1000;
+
+        // 무작위 요소를 제어하기 위해 Drawing 클래스에 대한 목 객체 생성
+        Drawing mockDrawing = Mockito.mock(Drawing.class);
+
+        // drawList() 메소드가 항상 3개의 Grade.B 항목을 반환하도록 설정
+        List<Item> mockDrawnResults = new ArrayList<>();
+        mockDrawnResults.add(new Item("B_ITEM1", Grade.B, LocalDateTime.now()));
+        mockDrawnResults.add(new Item("B_ITEM2", Grade.B, LocalDateTime.now()));
+        mockDrawnResults.add(new Item("B_ITEM3", Grade.B, LocalDateTime.now()));
+        mockDrawnResults.add(new Item("B_ITEM4", Grade.B, LocalDateTime.now()));
+        mockDrawnResults.add(new Item("B_ITEM5", Grade.B, LocalDateTime.now()));
+        mockDrawnResults.add(new Item("B_ITEM6", Grade.B, LocalDateTime.now()));
+        mockDrawnResults.add(new Item("B_ITEM7", Grade.B, LocalDateTime.now()));
+        when(mockDrawing.drawList(drawsCount)).thenReturn(Collections.singletonList(mockDrawnResults));
 
 
+        //when
+        List<Object> drawnResults = drawing.drawList(drawsCount);
 
+        //then
+        long bGradeDrawnCount = drawnResults.stream()
+                .filter(result -> result instanceof Item && ((Item) result).getGrade() == Grade.B)
+                .count();
 
+        assertTrue(bGradeDrawnCount <= 3, "3개?");
+
+    }
+        
 }
+
+
+
+
